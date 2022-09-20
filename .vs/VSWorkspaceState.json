@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\MauiApp"
   ],
-  "SelectedNode": "\\MauiApp.sln",
+  "SelectedNode": "\\MauiApp\\AMPAS.sln",
   "PreviewInSolutionExplorer": false
 }

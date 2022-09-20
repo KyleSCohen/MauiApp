@@ -53,24 +53,50 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Model\" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
+	  <PackageReference Include="Microsoft.ApplicationInsights" Version="2.21.0" />
+	  <PackageReference Include="Microsoft.ApplicationInsights.PerfCounterCollector" Version="2.21.0" />
+	  <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="6.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Compile Update="Root.xaml.cs">
 	    <DependentUpon>Root.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="View\ProfilePage.xaml.cs">
+	    <DependentUpon>ProfilePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\MoviesPage.xaml.cs">
+	    <DependentUpon>MoviesPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\MediaPage.xaml.cs">
+	    <DependentUpon>MediaPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\FruitsPage.xaml.cs">
+	    <DependentUpon>FruitsPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="View\FruitTemplate.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\ProfilePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\MoviesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\MediaPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\HomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\LoginPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\FruitsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

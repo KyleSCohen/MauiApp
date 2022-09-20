@@ -8,7 +8,7 @@ public partial class HomeViewModel : BaseViewModel
     [ObservableProperty]
     private string token;
 
-    [RelayCommand]
+    [RelayCommand] // LogoutCommand
     public async void Logout(object sender)
         => await Shell.Current.GoToAsync("//Login");
 }

@@ -11,9 +11,35 @@
         ContentTemplate="{DataTemplate view:LoginPage}"
         Route="Login" />
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate view:HomePage}"
-        Route="Home" />
+
+    <TabBar
+        Route="Tabs">
+        <Tab
+            Title="Movies"
+            Route="Movies">
+            <ShellContent
+                ContentTemplate="{DataTemplate view:MoviesPage}"/>
+
+        </Tab>
+        <Tab
+            Title="Fruits"
+            Route="Fruits">
+            <ShellContent
+                ContentTemplate="{DataTemplate view:FruitsPage}"/>
+        </Tab>
+        <Tab
+            Title="Media"
+            Route="Media">
+            <ShellContent
+                ContentTemplate="{DataTemplate view:MediaPage}" />
+        </Tab>
+
+        <Tab
+            Title="Profile"
+            Route="Profile">
+            <ShellContent
+                ContentTemplate="{DataTemplate view:ProfilePage}"/>
+        </Tab>
+    </TabBar>
 
 </Shell>

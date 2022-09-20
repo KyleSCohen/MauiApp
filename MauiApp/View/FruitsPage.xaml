@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:view="clr-namespace:AMPAS.View"
+             x:Class="AMPAS.View.FruitsPage"
+             Title="Fruits">
+    <VerticalStackLayout>
+        <CollectionView
+            VerticalOptions="FillAndExpand"
+            ItemsSource="{Binding Fruits}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout
+                    Orientation="Vertical"
+                    Span="4"/>
+            </CollectionView.ItemsLayout>
+            
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <view:FruitTemplate/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            
+        </CollectionView>
+        <Button
+            Margin="10,10,10,10"
+            Text="Add"
+            Command="{Binding AddCommand}" />
+        <Button
+            Margin="10,0,10,10"
+            Text="Remove"
+            Command="{Binding RemoveCommand}" />
+    </VerticalStackLayout>
+</ContentPage>
