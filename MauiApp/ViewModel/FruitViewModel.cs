@@ -6,16 +6,18 @@ public partial class FruitViewModel : BaseViewModel
 	private FruitService _fruitService;
 	private TelemetryClient _telemetryClient;
 
-	public FruitViewModel(FruitService fruitService, TelemetryClient telemetryClient)
-	{
-		_fruitService = fruitService;
-		_telemetryClient = telemetryClient;
-	}
+    public FruitViewModel(FruitService fruitService, TelemetryClient telemetryClient)
+    {
+        _fruitService = fruitService;
+        _telemetryClient = telemetryClient;
+    }
 
-	[RelayCommand]
-	public void Add()
-	{
-		Fruits.Insert(0, _fruitService.GetFruit());
+    [RelayCommand]
+    public void Add()
+    {
+        Fruit fruit = _fruitService.GetFruit();
+        _telemetryClient.TrackEvent(fruit.Name);
+        Fruits.Insert(0, fruit);
     }
 
     [RelayCommand]
