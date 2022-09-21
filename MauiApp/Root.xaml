@@ -41,5 +41,7 @@
                 ContentTemplate="{DataTemplate view:ProfilePage}"/>
         </Tab>
     </TabBar>
+    
+    
 
 </Shell>

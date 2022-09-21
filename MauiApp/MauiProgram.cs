@@ -1,15 +1,17 @@
 ﻿
+global using AMPAS.Model;
+global using System.Collections.ObjectModel;
 global using CommunityToolkit.Mvvm.ComponentModel;
 global using CommunityToolkit.Mvvm.Input;
 global using AMPAS.ViewModel;
 global using AMPAS.View;
-global using AMPAS.Model;
-global using System.Collections.ObjectModel;
-global using Microsoft.ApplicationInsights;
-global using Microsoft.ApplicationInsights.Extensibility;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.ApplicationInsights.Extensibility.PerfCounterCollector.QuickPulse;
+using Microsoft.ApplicationInsights;
+using Microsoft.ApplicationInsights.Extensibility;
+using System.Globalization;
+
 
 namespace AMPAS;
 
@@ -19,7 +21,7 @@ public static class MauiProgram
 	{
 		var builder = MauiApp.CreateBuilder();
 
-        // Register Logger (Application Insights)
+        // Register logger (Application Insights)
         TelemetryConfiguration cfg = TelemetryConfiguration.CreateDefault();
         cfg.ConnectionString = "InstrumentationKey=8b501c6d-2435-4647-8db7-0661b59b885a;IngestionEndpoint=https://eastus-8.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus.livediagnostics.monitor.azure.com/";
         QuickPulseTelemetryProcessor qp = null;
@@ -42,9 +44,19 @@ public static class MauiProgram
         string uniqueID = Guid.NewGuid().ToString();
 
         client.Context.User.AccountId ??= uniqueID;
-		client.Context.User.Id ??= uniqueID;
+        client.Context.User.Id ??= uniqueID;
 
-		builder
+        // We have to set the right context for the Device to log correctly in App Insights
+
+        client.Context.Device.Model ??= DeviceInfo.Model;
+        client.Context.Device.OperatingSystem ??= DeviceInfo.Platform.ToString();
+        client.Context.Device.Language ??= CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+        client.Context.Device.OemName ??= DeviceInfo.Current.Manufacturer.ToString();
+        client.Context.Device.Type ??= DeviceInfo.Current.DeviceType.ToString();
+        client.Context.Device.NetworkType ??= Connectivity.Current.NetworkAccess.ToString();
+
+
+        builder
 			.UseMauiApp<App>()
 			.ConfigureFonts(fonts =>
 			{
@@ -52,8 +64,9 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-        // Register all dependencies
-        builder.Services.AddSingleton<LoginViewModel>();
+        builder.Services.AddSingleton(client);
+
+		builder.Services.AddSingleton<LoginViewModel>();
 		builder.Services.AddSingleton<LoginPage>();
 
 		builder.Services.AddSingleton<HomeViewModel>();

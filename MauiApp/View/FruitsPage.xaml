@@ -4,7 +4,8 @@
              xmlns:view="clr-namespace:AMPAS.View"
              x:Class="AMPAS.View.FruitsPage"
              Title="Fruits">
-    <VerticalStackLayout>
+    <StackLayout>
+
         <CollectionView
             VerticalOptions="FillAndExpand"
             ItemsSource="{Binding Fruits}">
@@ -21,13 +22,20 @@
             </CollectionView.ItemTemplate>
             
         </CollectionView>
+        
         <Button
-            Margin="10,10,10,10"
+            Margin="10,0,10,10"
+            VerticalOptions="End"
             Text="Add"
-            Command="{Binding AddCommand}" />
+            Command="{Binding AddCommand}"/>
         <Button
             Margin="10,0,10,10"
             Text="Remove"
-            Command="{Binding RemoveCommand}" />
-    </VerticalStackLayout>
+            Command="{Binding RemoveCommand}"/>
+        <Button
+            Margin="10,0,10,10"
+            Text="Exception"
+            BackgroundColor="Red"
+            Command="{Binding BadCommand}"/>
+    </StackLayout>
 </ContentPage>
